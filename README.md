@@ -1,6 +1,9 @@
 # TypeForge ⚡
 
-> **High-Performance Typing Practice Engine for Competitive Programmers & Software Engineers**
+[![TypeForge CI/CD](https://github.com/vinish1997/TypeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/vinish1997/TypeForge/actions/workflows/ci.yml)    [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-blue?style=flat&logo=github)](https://vinish1997.github.io/TypeForge/)
+
+> **High-Performance Typing Practice Engine for Competitive Programmers & Software Engineers**  
+> **Live Demo**: [https://vinish1997.github.io/TypeForge/](https://vinish1997.github.io/TypeForge/)
 
 TypeForge is an ultra-fast, zero-jank typing application specialized for mastering code syntax, language symbols, and algorithmic patterns in Python and Java.
 
