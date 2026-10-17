@@ -1,0 +1,26 @@
+# Project Guide Mentoring & Tracking Files (Do not commit to git)
+PROJECT_ROADMAP.md
+PROJECT_STATE.json
+AGENTS.md
+docs/PROJECT_REQUIREMENTS.md
+docs/DECISION_LOG.md
+docs/RISKS_AND_ASSUMPTIONS.md
+docs/LOW_LEVEL_DESIGN.md
+.agents/
+.project-guide/
+
+# OS & Environment
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.local
+
+# Dependency directories (standard defaults)
+node_modules/
+dist/
+build/
+target/
+venv/
+.venv/
+__pycache__/

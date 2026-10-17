@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-main: #090d16;
+    --bg-surface: #131b2e;
+    --border-color: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-correct: #4ade80;
+    --text-error: #f87171;
+    --bg-error: rgba(248, 113, 113, 0.15);
+    --caret-color: #38bdf8;
+    --font-code: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, monospace;
+    --font-ui: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#app {
+    width: 100%;
+    max-width: 1000px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ==========================================
+   2. Code Canvas & Editor Card
+   ========================================== */
+
+.editor-main {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.snippet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.snippet-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.badge-difficulty {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background-color: rgba(74, 222, 128, 0.15);
+    color: var(--text-correct);
+    font-weight: 600;
+}
+
+.code-canvas {
+    font-family: var(--font-code);
+    font-size: 1.25rem;
+    /* Slightly larger, more readable */
+    font-weight: 500;
+    /* Medium weight gives code substance */
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+    /* Gives characters breathing room */
+    user-select: none;
+    overflow-x: auto;
+}
+
+.code-line {
+    display: flex;
+    white-space: pre;
+}
+
+.line-gutter {
+    width: 3rem;
+    text-align: right;
+    padding-right: 1.25rem;
+    margin-right: 1.25rem;
+    border-right: 1px solid var(--border-color);
+    /* IDE vertical divider */
+    color: #475569;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.line-content {
+    white-space: pre;
+    flex: 1;
+}
+
+/* ==========================================
+   Character State Tokens
+   ========================================== */
+
+.char {
+    position: relative;
+}
+
+.char-pending {
+    color: var(--text-muted);
+}
+
+.char-correct {
+    color: var(--text-correct);
+}
+
+.char-incorrect {
+    color: var(--text-error);
+    background-color: var(--bg-error);
+    border-radius: 2px;
+}
+
+.char-newline {
+    opacity: 0.35;
+    font-size: 0.75em;
+    margin-left: 0.35rem;
+    /* Small space after the last code character */
+}
+
+/* Caret Cursor */
+.caret {
+    box-shadow: -2px 0 0 0 var(--caret-color);
+    animation: pulse-caret 1s infinite;
+}
+
+@keyframes pulse-caret {
+
+    0%,
+    100% {
+        box-shadow: -2px 0 0 0 var(--caret-color);
+    }
+
+    50% {
+        box-shadow: -2px 0 0 0 transparent;
+    }
+}
+
+/* ==========================================
+   3. Header, Nav & Stats
+   ========================================== */
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-lang {
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-lang:hover {
+    color: var(--text-main);
+    border-color: #334155;
+}
+
+.btn-lang.active {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: var(--caret-color);
+    border-color: var(--caret-color);
+}
+
+.stats-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.stat-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.4rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    font-family: var(--font-code);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* ==========================================
+   4. Modals & Overlays
+   ========================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.overlay,
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(9, 13, 22, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.overlay-card,
+.modal-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    max-width: 450px;
+    width: 90%;
+}
+
+.overlay-card h2,
+.modal-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.overlay-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.modal-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.modal-stats>div {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.modal-stat-val {
+    font-family: var(--font-code);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-correct);
+    margin-top: 0.25rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-primary {
+    background-color: var(--text-correct);
+    color: #052e16;
+    border: none;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    color: var(--text-main);
+    border-color: #475569;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TypeForge - Competitive Typing Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+    <div id="app">
+        <header class="app-header">
+            <h1>TypeForge</h1>
+            <button id="btn-python" class="btn-lang active">Python</button>
+            <button id="btn-java" class="btn-lang">Java</button>
+            <div id="stats" class="stats-container">
+                <div class="stat-card">
+                    <span class="stat-label">WPM</span>
+                    <span id="metric-wpm" class="stat-value">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Accuracy</span>
+                    <span id="metric-acc" class="stat-value">100%</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Time</span>
+                    <span id="metric-time" class="stat-value">0s</span>
+                </div>
+            </div>
+        </header>
+        <main class="editor-main">
+            <div class="snippet-header">
+                <span id="snippet-title" class="snippet-title">Binary Search</span>
+                <span id="snippet-difficulty" class="badge-difficulty">Easy</span>
+            </div>
+            <div id="code-canvas"></div>
+        </main>
+        <div id="pause-overlay" class="overlay hidden">
+            <div class="overlay-card">
+                <h2>Session Paused</h2>
+                <p>Click anywhere or press any key to resume</p>
+            </div>
+        </div>
+        <div id="results-modal" class="modal-backdrop hidden">
+            <div class="modal-card">
+                <h2>Snippet Completed!</h2>
+                <div class="modal-stats">
+                    <div><span class="modal-stat-label">Net WPM</span><span id="final-wpm"
+                            class="modal-stat-val">0</span></div>
+                    <div><span class="modal-stat-label">Accuracy</span><span id="final-acc"
+                            class="modal-stat-val">100%</span></div>
+                    <div><span class="modal-stat-label">Time</span><span id="final-time"
+                            class="modal-stat-val">0s</span></div>
+                    <div><span class="modal-stat-label">Errors</span><span id="final-errors"
+                            class="modal-stat-val">0</span></div>
+                </div>
+                <div class="modal-actions">
+                    <button id="btn-next" class="btn-primary">Next Snippet (Enter)</button>
+                    <button id="btn-retry" class="btn-secondary">Retry (Esc)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
